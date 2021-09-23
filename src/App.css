@@ -1,0 +1,32 @@
+.board {
+  background-color: rgb(231, 227, 222);
+  padding: 16px;
+}
+
+.board h1 {
+  text-align: center;
+}
+
+.board-columns {
+  display: flex;
+}
+
+.column {
+  width: 220px;
+  padding: 24px 16px;
+  border: 1px solid black;
+  border-radius: 4px;
+  background-color: rgb(211, 207, 202);
+}
+
+.column + .column {
+  margin-left: 24px;
+}
+
+.card {
+  background-color: white;
+  border: 1px solid black;
+  padding: 24px 16px;
+  margin-bottom: 24px;
+  border-radius: 2px;
+}
