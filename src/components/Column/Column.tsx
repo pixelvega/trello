@@ -1,23 +1,28 @@
-import { useState } from "react";
-import { initialData } from "../../data/data";
+import { Droppable } from "react-beautiful-dnd";
 import { IColumn, ICard } from "../../data/typing";
 import Card from '../Card/Card';
 
 interface IProps {
   column: IColumn
+  cards: ICard[]
 }
 
-const Column: React.FC<IProps> = ({ column }) => {
-  const { name } = column;
-  const [cards, setCards] = useState<ICard[]>(initialData.cards)
+const Column: React.FC<IProps> = ({ column, cards }) => {
   return (
-    <div className="column">
-      <h2>{name}</h2>
-      <div>
-        {cards.filter((card: ICard) => column.cardsIds?.find((cardId: string) => cardId === card.id))
-          .map((card: ICard) => <Card card={card} />)}
-      </div>
-    </div>
+    <Droppable droppableId={column.id}>
+      {(provided) => (
+        <div className="column"
+          ref={provided.innerRef}
+          {...provided.droppableProps}
+        >
+          <h2>{column.name}</h2>
+          <ol>
+            {cards?.map((card: ICard, index: number) => <Card key={card.id} card={card} index={index} />)}
+            {provided.placeholder}
+          </ol>
+        </div>
+      )}
+    </Droppable>
   )
 }
 
