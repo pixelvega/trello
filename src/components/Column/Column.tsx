@@ -10,15 +10,17 @@ interface IProps {
 const Column: React.FC<IProps> = ({ column, cards }) => {
   return (
     <Droppable droppableId={column.id}>
-      {(provided) => (
-        <div className="column"
+      {(provided, snapshot) => (
+        <div className={`column ${snapshot.isDraggingOver ? 'is-dragging-over' : ''}`}
           ref={provided.innerRef}
           {...provided.droppableProps}
         >
           <h2>{column.name}</h2>
           <ol>
             {cards?.map((card: ICard, index: number) => <Card key={card.id} card={card} index={index} />)}
-            {provided.placeholder}
+            <div className="placeholder">
+              {provided.placeholder}
+            </div>
           </ol>
         </div>
       )}

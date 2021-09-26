@@ -13,11 +13,12 @@ const Card: React.FC<IProps> = ({ card, index }) => {
       draggableId={id}
       index={index}
     >
-      {(provided) => (
-        <li className="card"
+      {(provided, snapshot) => (
+        <li className={`card ${snapshot.isDragging ? 'is-dragging' : ''}`}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           ref={provided.innerRef}
+        // data-is-dragging={snapshot.isDragging} // if styled components
         >
           <h3>{name}</h3>
         </li>
